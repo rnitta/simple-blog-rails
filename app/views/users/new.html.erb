@@ -1,5 +1,5 @@
 <h1>Users#new</h1>
-<%= form_for @user,:url => {:action => :new} do |f| %>
+<%= form_for @user,:url => {:action => :create} do |f| %>
   <%= f.label :name, '名前' %>
   <%= f.text_field :name %>
   <%= f.label :email, 'メールアドレス' %>
@@ -8,5 +8,11 @@
   <%= f.password_field :password %>
   <%= f.label :password_confirmation, '確認' %>
   <%= f.password_field :password_confirmation %>
+  <% if @user.errors.any? %>
+    <h2>エラー</h2>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  <% end %>
   <%= f.submit "作成" %>
 <% end %>
