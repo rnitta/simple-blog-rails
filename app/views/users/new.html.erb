@@ -10,9 +10,11 @@
   <%= f.password_field :password_confirmation %>
   <% if @user.errors.any? %>
     <h2>エラー</h2>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
   <% end %>
   <%= f.submit "作成" %>
 <% end %>
