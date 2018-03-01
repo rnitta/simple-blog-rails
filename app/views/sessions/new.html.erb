@@ -1,0 +1,11 @@
+<h1>ログイン</h1>
+<%= form_for @user, url: login_path do |f| %>
+  <%= f.label :email, 'メールアドレス' %>
+  <%= f.text_field :email %>
+  <%= f.label :password, 'パスワード' %>
+  <%= f.password_field :password %>
+  <%= f.submit "ログイン" %>
+  <% if @login_error %>
+    <p>メールアドレスかパスワードが違います</p>
+  <% end %>
+<% end %>

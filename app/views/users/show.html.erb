@@ -4,3 +4,13 @@
   <li><%= @user.email %></li>
   <li><%= @user.created_at %></li>
 </ul>
+<% if logged_in? %>
+  <ul>
+    <li><%= link_to(current_user.name, current_user) %></li>
+    <li><%= link_to("ログアウト", logout_path, method: :delete) %></li>
+  </ul>
+<% else %>
+  <ul>
+    <li><%= link_to("ログイン", login_path) %></li>
+  </ul>
+<% end %>
