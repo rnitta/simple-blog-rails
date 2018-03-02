@@ -7,5 +7,5 @@ class Article < ApplicationRecord
   validates :name, presence: true,
                    length: { maximum: 255 },
                    format: { with: /\w/ },
-                   uniqueness: { scope: :blog }
+                   uniqueness: { scope: :blog_id }
 end
