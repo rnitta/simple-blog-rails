@@ -6,6 +6,6 @@ class Article < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :name, presence: true,
                    length: { maximum: 255 },
-                   format: { with: /\w/ },
+                   format: { with: /^\w+$/ },
                    uniqueness: { scope: :blog_id }
 end

@@ -8,6 +8,6 @@ class Blog < ApplicationRecord
   validates :description, presence: true, length: { maximum: 255 }
   validates :name, presence: true,
                    length: { maximum: 255 },
-                   format: { with: /\w/ },
+                   format: { with: /^\w+$/ },
                    uniqueness: true
 end
