@@ -22,10 +22,12 @@ class BlogsController < ApplicationController
 
   def edit
     @blog = Blog.find(params[:id])
+    check_authority(@blog)
   end
 
   def update
     @blog = Blog.find(params[:id])
+    check_authority(@blog)
     if @blog.update_attributes(blog_params)
       redirect_to_blog(@blog)
     else
@@ -34,7 +36,9 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    Blog.find(params[:id]).destroy
+    blog = Blog.find(params[:id])
+    check_authority(blog)
+    blog.destroy
     redirect_to(current_user)
   end
 
@@ -46,5 +50,9 @@ class BlogsController < ApplicationController
 
   def redirect_to_blog(blog)
     redirect_to("/blog/#{blog.name}")
+  end
+
+  def check_authority(blog)
+    redirect_to_blog(blog) unless blog.user_id == current_user.id
   end
 end
