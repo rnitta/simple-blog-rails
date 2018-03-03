@@ -14,7 +14,7 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blog_params)
     @blog.user_id = current_user.id
     if @blog.save
-      redirect_to(location_of(@blog))
+      redirect_to_blog(@blog)
     else
       render :new
     end
@@ -27,7 +27,7 @@ class BlogsController < ApplicationController
   def update
     @blog = Blog.find(params[:id])
     if @blog.update_attributes(blog_params)
-      redirect_to(location_of(@blog))
+      redirect_to_blog(@blog)
     else
       render :edit
     end
@@ -44,7 +44,7 @@ class BlogsController < ApplicationController
     params.require(:blog).permit(:title, :description, :name)
   end
 
-  def location_of(blog)
-    "/blog/#{blog.name}"
+  def redirect_to_blog(blog)
+    redirect_to("/blog/#{blog.name}")
   end
 end
