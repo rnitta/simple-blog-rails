@@ -1,2 +1,18 @@
 <h1>Blogs#edit</h1>
-<p>Find me in app/views/blogs/edit.html.erb</p>
+<%= form_for @blog do |f| %>
+  <%= f.label :title, 'ブログタイトル' %>
+  <%= f.text_field :title %>
+  <%= f.label :description, 'ブログ説明(255文字以内)' %>
+  <%= f.text_field :description %>
+  <%= f.label :name, 'ブログID(半角英数とアンダーバーのみ)' %>
+  <%= f.text_field :name %>
+  <% if @blog.errors.any? %>
+    <h2>エラー</h2>
+    <ul>
+      <% @blog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= f.submit "更新" %>
+<% end %>
