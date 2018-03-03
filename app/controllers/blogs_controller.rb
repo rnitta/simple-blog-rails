@@ -22,24 +22,30 @@ class BlogsController < ApplicationController
 
   def edit
     @blog = Blog.find(params[:id])
-    check_authority(@blog)
+    redirect_to_blog unless authorized?(@blog)
   end
 
   def update
     @blog = Blog.find(params[:id])
-    check_authority(@blog)
-    if @blog.update_attributes(blog_params)
-      redirect_to_blog(@blog)
+    if authorized?(@blog)
+      if @blog.update_attributes(blog_params)
+        redirect_to_blog(@blog)
+      else
+        render :edit
+      end
     else
-      render :edit
+      redirect_to_blog(@blog)
     end
   end
 
   def destroy
     blog = Blog.find(params[:id])
-    check_authority(blog)
-    blog.destroy
-    redirect_to(current_user)
+    if authorized?(blog)
+      blog.destroy
+      redirect_to(current_user)
+    else
+      redirect_to_blog(blog)
+    end
   end
 
   private
@@ -52,7 +58,7 @@ class BlogsController < ApplicationController
     redirect_to("/blog/#{blog.name}")
   end
 
-  def check_authority(blog)
-    redirect_to_blog(blog) unless blog.user_id == current_user.id
+  def authorized?(blog)
+    blog.user_id == current_user.id
   end
 end
