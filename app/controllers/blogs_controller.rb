@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
   def show
     @blog = Blog.find_by(name: params[:name])
+    @articles = @blog.articles
   end
 
   def new
