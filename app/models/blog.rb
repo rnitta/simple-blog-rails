@@ -10,4 +10,6 @@ class Blog < ApplicationRecord
                    length: { maximum: 255 },
                    format: { with: /\A\w+\z/ },
                    uniqueness: true
+  extend FriendlyId
+  friendly_id :name
 end
