@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 class BlogsController < ApplicationController
+  require 'securerandom'
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :edit, :update, :destroy]
   def show
   end
 
   def new
-    @blog = Blog.new
-  end
-
-  def create
-    @blog = Blog.new(blog_params)
-    @blog.user_id = current_user.id
-    if @blog.save
-      redirect_to_blog(@blog)
+    if current_user.blogs.empty?
+      @blog = Blog.new
+      @blog.name = SecureRandom.hex(8)
+      @blog.title = current_user.name + 'のブログ'
+      @blog.description = 'ブログの説明文'
+      @blog.user_id = current_user.id
+      redirect_to(edit_blog_path(@blog.name)) if @blog.save
     else
-      render :new
+      redirect_to(blog_path(current_user.blogs.first.name))
     end
   end
 
