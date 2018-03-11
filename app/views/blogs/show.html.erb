@@ -1,2 +1,22 @@
-<h1>Blogs#show</h1>
-<p>Find me in app/views/blogs/show.html.erb</p>
+<div id="header">
+  <h1><%= @blog.name %></h1>
+  <p><%= @blog.id %></p>
+</div>
+<div id="articles">
+  <% @blog.articles.each do |article| %>
+    <div class="article">
+      <h2><%= article.title %></h2>
+      <p><%= article.content %></p>
+      <p><%= article.category.name %></p>
+      <p><%= article.created_at %></p>
+    </div>
+  <% end %>
+</div>
+<div id="footer">
+  <% if true %>
+    <ul>
+      <li><%= link_to("編集", edit_blog_path(@blog.name)) %></li>
+      <li><%= link_to("ブログ削除", blog_path(@blog.name), method: :delete) %></li>
+    </ul>
+  <% end %>
+</div>
