@@ -13,7 +13,7 @@
   <% end %>
 </div>
 <div id="footer">
-  <% if true %>
+  <% if authorized?(@blog) %>
     <ul>
       <li><%= link_to("編集", edit_blog_path(@blog.name)) %></li>
       <li><%= link_to("ブログ削除", blog_path(@blog.name), method: :delete) %></li>

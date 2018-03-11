@@ -2,6 +2,7 @@
 
 class BlogsController < ApplicationController
   require 'securerandom'
+  include BlogsHelper
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
   before_action :require_login, only: [:new, :edit, :update, :destroy]
   def show
@@ -53,10 +54,6 @@ class BlogsController < ApplicationController
 
   def redirect_to_blog(blog)
     redirect_to("/blogs/#{blog.name}")
-  end
-
-  def authorized?(blog)
-    blog.user_id == current_user.id
   end
 
   def set_blog
