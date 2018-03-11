@@ -22,18 +22,18 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    redirect_to_blog unless authorized?(@blog)
+    redirect_to(blog_path(@blog.name)) unless authorized?(@blog)
   end
 
   def update
     if authorized?(@blog)
       if @blog.update_attributes(blog_params)
-        redirect_to_blog(@blog)
+        redirect_to(blog_path(@blog.name))
       else
         render :edit
       end
     else
-      redirect_to_blog(@blog)
+      redirect_to(blog_path(@blog.name))
     end
   end
 
@@ -42,7 +42,7 @@ class BlogsController < ApplicationController
       @blog.destroy
       redirect_to(current_user)
     else
-      redirect_to_blog(@blog)
+      redirect_to(blog_path(@blog.name))
     end
   end
 
@@ -50,10 +50,6 @@ class BlogsController < ApplicationController
 
   def blog_params
     params.require(:blog).permit(:title, :description, :name)
-  end
-
-  def redirect_to_blog(blog)
-    redirect_to("/blogs/#{blog.name}")
   end
 
   def set_blog
