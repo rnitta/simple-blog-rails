@@ -2,8 +2,8 @@
 
 class ArticlesController < ApplicationController
   include BlogsHelper
-  before_action :set_blog, only: [:index]
-  before_action :set_article, only: []
+  before_action :set_blog, only: [:index, :show]
+  before_action :set_article, only: [:show]
 
   def index
     if authorized?(@blog)

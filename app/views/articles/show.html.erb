@@ -1,2 +1,11 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<h1><%= @blog.title %></h1>
+<div class="article">
+  <h2><%= @article.title %></h2>
+  <p><%= @article.content %></p>
+  <p><%= @article.category.name %></p>
+  <p><%= @article.created_at %></p>
+    <% if authorized?(@blog) %>
+        <%= link_to('編集', edit_blog_article_path(@blog.name, @article.name)) %>
+        <%= link_to('削除', blog_article_path(@blog.name, @article.name), method: :delete) %>
+    <% end %>
+</div>
