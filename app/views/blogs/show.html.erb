@@ -1,0 +1,22 @@
+<div id="header">
+  <h1><%= @blog.title %></h1>
+  <p><%= @blog.description %></p>
+</div>
+<div id="articles">
+  <% @blog.articles.each do |article| %>
+    <div class="article">
+      <h2><%= article.title %></h2>
+      <p><%= article.content %></p>
+      <p><%= article.category.name %></p>
+      <p><%= article.created_at %></p>
+    </div>
+  <% end %>
+</div>
+<div id="footer">
+  <% if authorized?(@blog) %>
+    <ul>
+      <li><%= link_to("編集", edit_blog_path(@blog.name)) %></li>
+      <li><%= link_to("ブログ削除", blog_path(@blog.name), method: :delete) %></li>
+    </ul>
+  <% end %>
+</div>
