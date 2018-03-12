@@ -8,4 +8,6 @@ class Article < ApplicationRecord
                    length: { maximum: 255 },
                    format: { with: /\A\w+\z/ },
                    uniqueness: { scope: :blog_id }
+  extend FriendlyId
+  friendly_id :name
 end
