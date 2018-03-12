@@ -6,17 +6,15 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show]
 
   def index
-    if authorized?(@blog)
-      @articles = Blog.friendly.find(params[:blog_name]).articles
-    else
-      redirect_to(blog_path(@blog.name))
-    end
+    redirect_to(blog_path(@blog.name)) unless authorized?(@blog)
+    @articles = Blog.friendly.find(params[:blog_name]).articles
   end
 
   def show
   end
 
   def new
+    redirect_to(blog_path(@blog.name)) unless authorized?(@blog)
     @article = Article.new
   end
 
