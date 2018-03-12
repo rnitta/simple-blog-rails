@@ -2,7 +2,7 @@
 
 class ArticlesController < ApplicationController
   include BlogsHelper
-  before_action :set_blog, only: [:index, :show]
+  before_action :set_blog, only: [:index, :show, :new]
   before_action :set_article, only: [:show]
 
   def index
@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @article = Article.new
   end
 
   def create
