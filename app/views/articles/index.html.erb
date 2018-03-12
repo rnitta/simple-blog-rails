@@ -1,0 +1,8 @@
+<h1><%= @blog.title %>の記事一覧</h1>
+<% @articles.each do |article| %>
+  <div class='index_articles'>
+    <%= link_to(article.title, blog_article_path(@blog.name, article.name)) %>
+    <%= link_to('編集', edit_blog_article_path(@blog.name, article.name)) %>
+    <%= link_to('削除', blog_article_path(@blog.name, article.name), method: :delete) %>
+  </div>
+<%end%>
