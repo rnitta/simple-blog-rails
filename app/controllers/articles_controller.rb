@@ -3,8 +3,8 @@
 class ArticlesController < ApplicationController
   include BlogsHelper
   before_action :require_authority, only: [:index, :new, :create, :edit, :update, :destroy]
-  before_action :set_blog, only: [:index, :show, :new, :create]
-  before_action :set_article, only: [:show, :edit, :update]
+  before_action :set_blog, only: [:index, :show, :new, :create, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   def index
     @articles = Blog.friendly.find(params[:blog_name]).articles
@@ -41,6 +41,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @article.destroy
+    redirect_to(blog_articles_path(@blog.name))
   end
 
   private
