@@ -6,7 +6,7 @@
   <%= f.label :content, '内容' %>
   <%= f.text_area :content %>
   <%= f.label :category, 'カテゴリ' %>
-  <%= f.select :category, @blog.categories.map{|cat| [cat.name, cat.id]} %>
+  <%= f.select :category, @blog.categories.map{|cat| [cat.name, cat.name]} %>
   <% if @article.errors.any? %>
     <h2>エラー</h2>
     <ul>

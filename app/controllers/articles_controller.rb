@@ -2,11 +2,11 @@
 
 class ArticlesController < ApplicationController
   include BlogsHelper
-  before_action :set_blog, only: [:index, :show, :new]
+  before_action :require_authority, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :set_blog, only: [:index, :show, :new, :create]
   before_action :set_article, only: [:show]
 
   def index
-    redirect_to(blog_path(@blog.name)) unless authorized?(@blog)
     @articles = Blog.friendly.find(params[:blog_name]).articles
   end
 
@@ -14,11 +14,11 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    redirect_to(blog_path(@blog.name)) unless authorized?(@blog)
     @article = Article.new
   end
 
   def create
+
   end
 
   def edit
@@ -38,5 +38,9 @@ class ArticlesController < ApplicationController
 
   def set_article
     @article = Blog.friendly.find(params[:blog_name]).articles.friendly.find(params[:name])
+  end
+
+  def require_authority
+    redirect_to(blog_path(@blog.name)) unless authorized?(@blog)
   end
 end
