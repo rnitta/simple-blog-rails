@@ -1,4 +1,4 @@
-<%= form_for @article, url: blog_articles_path(@blog.name) do |f| %>
+<%= form_for @article, url: path do |f| %>
   <%= f.label :title, 'タイトル' %>
   <%= f.text_field :title %>
   <%= f.label :name, 'パス' %>
@@ -6,7 +6,11 @@
   <%= f.label :content, '内容' %>
   <%= f.text_area :content %>
   <%= f.label :category, 'カテゴリ' %>
-  <%= f.select :category, @blog.categories.map{|cat| [cat.name, cat.name]} %>
+  <% if @article.category.nil? %>
+    <%= f.select :category, @blog.categories.map{|cat| [cat.name, cat.name]} %>
+  <% else %>
+    <%= f.select :category, @blog.categories.map{|cat| [cat.name, cat.name]}, selected: @article.category.name %>
+  <% end %>
   <% if @article.errors.any? %>
     <h2>エラー</h2>
     <ul>

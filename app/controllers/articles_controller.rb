@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   include BlogsHelper
   before_action :require_authority, only: [:index, :new, :create, :edit, :update, :destroy]
   before_action :set_blog, only: [:index, :show, :new, :create]
-  before_action :set_article, only: [:show]
+  before_action :set_article, only: [:show, :edit, :update]
 
   def index
     @articles = Blog.friendly.find(params[:blog_name]).articles
@@ -32,6 +32,12 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    if @article.update_attributes(article_params) && \
+       @article.update(category_id: Category.find_or_create_by(blog_id: @blog.id, name: category_params[:category]).id)
+      redirect_to(blog_path(@blog.name))
+    else
+      render :edit
+    end
   end
 
   def destroy

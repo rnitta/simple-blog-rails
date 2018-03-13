@@ -1,2 +1,2 @@
 <h1>記事新規投稿</h1>
-<%= render partial: "form" %>
+<%= render partial: "form", locals: {path: blog_articles_path(@blog.name)} %>

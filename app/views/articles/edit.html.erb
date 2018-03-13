@@ -1,2 +1,2 @@
-<h1>Articles#edit</h1>
-<p>Find me in app/views/articles/edit.html.erb</p>
+<h1>記事編集</h1>
+<%= render partial: "form", locals: {path: blog_article_path(@blog.name, @article.name)} %>
