@@ -7,9 +7,9 @@
   <%= f.text_area :content %>
   <%= f.label :category, 'カテゴリ' %>
   <% if @article.category.nil? %>
-    <%= f.select :category, @blog.categories.map{|cat| [cat.name, cat.name]} %>
+    <%= f.select :category, @blog.categories.pluck(:name) %>
   <% else %>
-    <%= f.select :category, @blog.categories.map{|cat| [cat.name, cat.name]}, selected: @article.category.name %>
+    <%= f.select :category, @blog.categories.pluck(:name), selected: @article.category.name %>
   <% end %>
   <% if @article.errors.any? %>
     <h2>エラー</h2>
