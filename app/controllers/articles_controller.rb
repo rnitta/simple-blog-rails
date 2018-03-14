@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.blog_id = @blog.id
-    @article.category_id = Category.find_or_create_by(blog_id: @blog.id, name: category_params[:category]).id
+    @article.category_id = Category.find_by(blog_id: @blog.id, name: category_params[:category]).id
     if @article.save
       redirect_to(blog_article_path(@blog.name, @article.name))
     else
@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update_attributes(article_params) && \
-       @article.update(category_id: Category.find_or_create_by(blog_id: @blog.id, name: category_params[:category]).id)
+       @article.update(category_id: Category.find_by(blog_id: @blog.id, name: category_params[:category]).id)
       redirect_to(blog_path(@blog.name))
     else
       render :edit
