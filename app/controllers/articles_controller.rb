@@ -2,7 +2,7 @@
 
 class ArticlesController < ApplicationController
   include BlogsHelper
-  before_action :require_authority, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :require_authority, except: :show
   before_action :set_blog, only: [:index, :show, :new, :create, :destroy]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
