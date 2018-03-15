@@ -12,6 +12,8 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    category = Category.create(name: '新規カテゴリ', blog_id: @blog.id)
+    redirect_to(edit_blog_category_path(@blog.name, category.id))
   end
 
   def edit
