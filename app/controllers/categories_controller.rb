@@ -28,6 +28,8 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    @category.destroy
+    redirect_to(blog_categories_path(@blog.name))
   end
 
   private
