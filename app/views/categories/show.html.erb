@@ -1,2 +1,9 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<h1><%= @blog.title %>の<%= @category.name %>カテゴリの記事一覧</h1>
+<% @category.articles.each do |article| %>
+  <div class="article">
+    <h2><%= article.title %></h2>
+    <p><%= article.content %></p>
+    <p><%= @category.name %></p>
+    <p><%= article.created_at %></p>
+  </div>
+<% end %>
