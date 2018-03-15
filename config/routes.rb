@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
   resources :blogs, except: [:index, :create], param: :name do
     resources :articles, param: :name
-    resources :categories
+    resources :categories, except: :create
   end
   get '/login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
