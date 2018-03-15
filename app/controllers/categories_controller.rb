@@ -20,6 +20,11 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    if @category.update_attributes(category_params)
+      redirect_to(blog_categories_path(@blog.name))
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -41,6 +46,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:article).permit(:name)
+    params.require(:category).permit(:name)
   end
 end
